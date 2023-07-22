@@ -1,0 +1,16 @@
+struct BasicTypes {
+    a: bool,
+    b: u8,
+    c: u16,
+    d: u32,
+    e: u64,
+    f: u128,
+    g: i8,
+    h: i16,
+    i: i32,
+    j: i64,
+    k: i128,
+    l: f32,
+    m: f64,
+    n: String,
+}

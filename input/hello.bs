@@ -1,0 +1,4 @@
+struct Hello {
+    a: u8,
+    b: u16,
+}
