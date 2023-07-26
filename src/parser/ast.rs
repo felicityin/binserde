@@ -19,6 +19,15 @@ pub struct Field {
 }
 
 pub enum Type {
+    BasicType(BasicType),
+    VecType(VecType),
+}
+
+pub struct VecType {
+    pub type_: BasicType,
+}
+
+pub enum BasicType {
     Bool,
     Uint8,
     Uint16,

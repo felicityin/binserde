@@ -13,7 +13,6 @@ pub Ast: Ast = <decls: (Decl)*> => Ast { <> };
 
 Decl: Decl = {
     Struct => Decl::Struct(<>),
-    // Tuple => Decl::Tuple(<>),
 }
 
 Struct: Struct = {
@@ -31,18 +30,29 @@ Field: Field = {
 Ident: String = r"[_a-zA-Z][_a-zA-Z0-9]*" => <>.to_string();
 
 Type: Type = {
-    "bool" => Type::Bool,
-    "u8" => Type::Uint8,
-    "u16" => Type::Uint16,
-    "u32" => Type::Uint32,
-    "u64" => Type::Uint64,
-    "u128" => Type::Uint128,
-    "i8" => Type::Int8,
-    "i16" => Type::Int16,
-    "i32" => Type::Int32,
-    "i64" => Type::Int64,
-    "i128" => Type::Int128,
-    "f32" => Type::Float32,
-    "f64" => Type::Float64,
-    "String" => Type::String,
+    BasicType => Type::BasicType(<>),
+    VecType => Type::VecType(<>),
+}
+
+VecType: VecType = {
+    "Vec" "<" <type_: BasicType> ">" => {
+        VecType { <> }
+    }
+}
+
+BasicType: BasicType = {
+    "bool" => BasicType::Bool,
+    "u8" => BasicType::Uint8,
+    "u16" => BasicType::Uint16,
+    "u32" => BasicType::Uint32,
+    "u64" => BasicType::Uint64,
+    "u128" => BasicType::Uint128,
+    "i8" => BasicType::Int8,
+    "i16" => BasicType::Int16,
+    "i32" => BasicType::Int32,
+    "i64" => BasicType::Int64,
+    "i128" => BasicType::Int128,
+    "f32" => BasicType::Float32,
+    "f64" => BasicType::Float64,
+    "String" => BasicType::String,
 }

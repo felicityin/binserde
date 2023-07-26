@@ -63,30 +63,58 @@ impl Generate for Struct {
         )?;
         writeln!(writer, "pub struct {} {{", self.id)?;
         for field in &self.fields {
-            writeln!(writer, "\tpub {}: {},", field.id, field.type_.generate_rs())?;
+            write!(writer, "\tpub {}: ", field.id)?;
+            field.type_.generate(writer)?;
+            writeln!(writer, ",")?;
         }
         writeln!(writer, "}}")?;
         Ok(())
     }
 }
 
-impl Type {
-    fn generate_rs(&self) -> &str {
+impl Generate for Type {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
         match self {
-            Type::Bool => "bool",
-            Type::Uint8 => "u8",
-            Type::Uint16 => "u16",
-            Type::Uint32 => "u32",
-            Type::Uint64 => "u64",
-            Type::Uint128 => "u128",
-            Type::Int8 => "i8",
-            Type::Int16 => "i16",
-            Type::Int32 => "i32",
-            Type::Int64 => "i64",
-            Type::Int128 => "i128",
-            Type::Float32 => "f32",
-            Type::Float64 => "f64",
-            Type::String => "String",
+            Type::BasicType(t) => t.generate(writer)?,
+            Type::VecType(t) => t.generate(writer)?,
         }
+        Ok(())
+    }
+}
+
+impl Generate for VecType {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
+        write!(writer, "Vec<")?;
+        self.type_.generate(writer)?;
+        write!(writer, ">")?;
+        Ok(())
+    }
+}
+
+impl Generate for BasicType {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
+        match self {
+            BasicType::Bool => write!(writer, "bool")?,
+            BasicType::Uint8 => write!(writer, "u8")?,
+            BasicType::Uint16 => write!(writer, "u16")?,
+            BasicType::Uint32 => write!(writer, "u32")?,
+            BasicType::Uint64 => write!(writer, "u64")?,
+            BasicType::Uint128 => write!(writer, "u128")?,
+            BasicType::Int8 => write!(writer, "i8")?,
+            BasicType::Int16 => write!(writer, "i16")?,
+            BasicType::Int32 => write!(writer, "i32")?,
+            BasicType::Int64 => write!(writer, "i64")?,
+            BasicType::Int128 => write!(writer, "i128")?,
+            BasicType::Float32 => write!(writer, "f32")?,
+            BasicType::Float64 => write!(writer, "f64")?,
+            BasicType::String => write!(writer, "String")?,
+        }
+        Ok(())
     }
 }

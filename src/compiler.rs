@@ -84,10 +84,7 @@ impl Compiler {
                             .open(&mod_file)
                             .unwrap()
                     } else {
-                        fs::OpenOptions::new()
-                            .append(true)
-                            .open(&mod_file)
-                            .unwrap()
+                        fs::OpenOptions::new().append(true).open(&mod_file).unwrap()
                     };
                     mode_file.write_all(&export_data).unwrap();
                     mode_file.flush().unwrap();

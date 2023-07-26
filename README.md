@@ -23,13 +23,17 @@ cargo run -- new-lib -t ts -n schemas -o output/typescript/src
 Generate Rust code.
 
 ```
-cargo run -- compile -t rs -i input/hello.bs input/basic_types.bs -o output/rust/types/src/generated
+cargo run -- compile -t rs \
+    -i input/hello.bs input/basic_types.bs input/vec.bs \
+    -o output/rust/types/src/generated
 ```
 
 Generate TypeSript code.
 
 ```
-cargo run -- compile -t ts -i input/hello.bs input/basic_types.bs -o output/typescript/src/schemas
+cargo run -- compile -t ts \
+    -i input/hello.bs input/basic_types.bs input/vec.bs \
+    -o output/typescript/src/schemas
 ```
 
 # Note
