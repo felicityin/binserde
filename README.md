@@ -24,7 +24,7 @@ Generate Rust code.
 
 ```
 cargo run -- compile -t rs \
-    -i input/hello.bs input/basic_types.bs input/vec.bs \
+    -i input/hello.bs input/basic_types.bs input/vec.bs input/nested_struct.bs input/vec_struct.bs \
     -o output/rust/types/src/generated
 ```
 
@@ -32,7 +32,7 @@ Generate TypeSript code.
 
 ```
 cargo run -- compile -t ts \
-    -i input/hello.bs input/basic_types.bs input/vec.bs \
+    -i input/hello.bs input/basic_types.bs input/vec.bs input/nested_struct.bs input/vec_struct.bs \
     -o output/typescript/src/schemas
 ```
 

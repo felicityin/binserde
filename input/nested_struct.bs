@@ -1,0 +1,7 @@
+struct Test1 {
+    a: Test2,
+}
+
+struct Test2 {
+    a: u16,
+}

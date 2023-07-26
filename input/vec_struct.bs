@@ -1,0 +1,8 @@
+struct Test3 {
+    a: Vec<u32>,
+    b: Vec<Test3>,
+}
+
+struct Test4 {
+    c: bool,
+}

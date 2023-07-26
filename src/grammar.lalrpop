@@ -32,12 +32,18 @@ Ident: String = r"[_a-zA-Z][_a-zA-Z0-9]*" => <>.to_string();
 Type: Type = {
     BasicType => Type::BasicType(<>),
     VecType => Type::VecType(<>),
+    <id: Ident> => Type::StructType(<>),
 }
 
 VecType: VecType = {
-    "Vec" "<" <type_: BasicType> ">" => {
+    "Vec" "<" <type_: VecItemType> ">" => {
         VecType { <> }
     }
+}
+
+VecItemType: VecItemType = {
+    BasicType => VecItemType::BasicType(<>),
+    <id: Ident> => VecItemType::StructType(<>),
 }
 
 BasicType: BasicType = {
