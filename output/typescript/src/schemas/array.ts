@@ -2,16 +2,18 @@
 
 import { Arr, Base, Bool, Int8, Int16, Int32, Int64, Int128, Option, String, Uint8, Uint16, Uint32, Uint64, Uint128, Float32, Float64, Vec } from 'bincoder';
 
-export class Test1 extends Base {
-  a: Test2;
+export class ArrayTest extends Base {
+  a: Arr<Uint8, 32>;
+  b: Arr<Test5, 2>;
 
-  constructor(a: Test2 = new Test2()) {
+  constructor(a: Arr<Uint8, 32> = new Arr(Uint8, 32), b: Arr<Test5, 2> = new Arr(Test5, 2)) {
     super()
     this.a = a;
+    this.b = b;
   }
 }
 
-export class Test2 extends Base {
+export class Test5 extends Base {
   a: Uint16;
 
   constructor(a: Uint16 = new Uint16()) {

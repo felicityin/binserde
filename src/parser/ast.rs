@@ -21,8 +21,14 @@ pub struct Field {
 #[allow(clippy::enum_variant_names)]
 pub enum Type {
     BasicType(BasicType),
+    ArrayType(ArrayType),
     VecType(VecType),
     StructType(String),
+}
+
+pub struct ArrayType {
+    pub type_: VecItemType,
+    pub len:   u64,
 }
 
 pub struct VecType {

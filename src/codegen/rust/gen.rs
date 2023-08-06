@@ -79,9 +79,22 @@ impl Generate for Type {
     fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
         match self {
             Type::BasicType(t) => t.generate(writer)?,
+            Type::ArrayType(t) => t.generate(writer)?,
             Type::VecType(t) => t.generate(writer)?,
             Type::StructType(t) => write!(writer, "{}", t)?,
         }
+        Ok(())
+    }
+}
+
+impl Generate for ArrayType {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
+        write!(writer, "[")?;
+        self.type_.generate(writer)?;
+        write!(writer, "; {}", self.len)?;
+        write!(writer, "]")?;
         Ok(())
     }
 }

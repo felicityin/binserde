@@ -1,0 +1,8 @@
+struct ArrayTest {
+    a: [u8; 32],
+    b: [Test5; 2],
+}
+
+struct Test5 {
+    a: u16,
+}

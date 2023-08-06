@@ -31,8 +31,15 @@ Ident: String = r"[_a-zA-Z][_a-zA-Z0-9]*" => <>.to_string();
 
 Type: Type = {
     BasicType => Type::BasicType(<>),
+    ArrayType => Type::ArrayType(<>),
     VecType => Type::VecType(<>),
     <id: Ident> => Type::StructType(<>),
+}
+
+ArrayType: ArrayType = {
+    "[" <type_: VecItemType> ";" <len: Uint64> "]" => {
+        ArrayType { <> }
+    }
 }
 
 VecType: VecType = {
@@ -61,4 +68,10 @@ BasicType: BasicType = {
     "f32" => BasicType::Float32,
     "f64" => BasicType::Float64,
     "String" => BasicType::String,
+}
+
+Uint64: u64 = {
+    r"[1-9][0-9]*" => u64::from_str_radix(<>, 10).unwrap(),
+    r"0[0-7]*" => u64::from_str_radix(<>, 8).unwrap(),
+    r"0[xX][0-9a-fA-F]+" => u64::from_str_radix(&<>[2..], 16).unwrap(),
 }

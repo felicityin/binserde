@@ -7,7 +7,7 @@
     "start": "ts-node src/index.ts"
   },
   "dependencies": {
-    "bincoder": "^0.3.0",
+    "bincoder": "^0.4.0",
     "typescript": "^5.1.6"
   }
 }
