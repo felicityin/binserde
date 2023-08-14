@@ -4,13 +4,22 @@ pub struct Ast {
 
 pub enum Decl {
     Struct(Struct),
-    // Tuple(Tuple),
-    // Enum(Enum),
+    Enum(Enum),
 }
 
 pub struct Struct {
     pub id:     String,
     pub fields: Vec<Field>,
+}
+
+pub struct Enum {
+    pub id:     String,
+    pub fields: Vec<EnumField>,
+}
+
+pub struct EnumField {
+    pub id:    String,
+    pub type_: VecItemType,
 }
 
 pub struct Field {
@@ -23,7 +32,7 @@ pub enum Type {
     BasicType(BasicType),
     ArrayType(ArrayType),
     VecType(VecType),
-    StructType(String),
+    StructOrEnum(String),
 }
 
 pub struct ArrayType {
@@ -37,7 +46,7 @@ pub struct VecType {
 
 pub enum VecItemType {
     BasicType(BasicType),
-    StructType(String),
+    StructOrEnum(String),
 }
 
 pub enum BasicType {

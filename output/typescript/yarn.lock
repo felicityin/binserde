@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-bincoder@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/bincoder/-/bincoder-0.4.0.tgz#0e7185c0ba2dee83130d9f0586de6e890a1efafc"
-  integrity sha512-+G2BQQhwwZ3Pmz+SSL9bOORFEqEbOMctGMrEs0hHHexG9KMXQ5/iogScl0C8uEXtq8WcANq0fBFfb9lTUhmZ7A==
+bincoder@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/bincoder/-/bincoder-0.5.0.tgz#616f4d92b816631d0fda9ebf7a2667ebd70c5a9f"
+  integrity sha512-d4GD2jKV96G1AEtSEFlkClsgzdAbkY+1q9hyvCOf4R5UIJDXMkRF9LBQXMMBt5etHH0vRAJmgpCqP8hIsgF7Xw==
   dependencies:
     typescript "^5.1.6"
 

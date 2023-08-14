@@ -1,6 +1,6 @@
 struct Test3 {
-    a: Vec<u32>,
-    b: Vec<Test3>,
+    a: vec<u32>,
+    b: vec<Test3>,
 }
 
 struct Test4 {
