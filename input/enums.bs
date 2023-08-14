@@ -1,0 +1,12 @@
+enum Test5 {
+    A(bool),
+    B(Test6),
+}
+
+struct Test6 {
+    a: u32,
+}
+
+struct Test7 {
+    a: vec<Test5>,
+}

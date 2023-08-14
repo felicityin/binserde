@@ -49,6 +49,7 @@ impl Generate for Decl {
     fn generate<W: io::Write>(&self, writer: &mut W, mode: u8) -> io::Result<Self::Out> {
         match self {
             Decl::Struct(s) => s.generate(writer, mode),
+            Decl::Enum(e) => e.generate(writer, mode),
         }
     }
 }
@@ -89,6 +90,31 @@ impl Generate for Struct {
     }
 }
 
+impl Generate for Enum {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W, mode: u8) -> io::Result<Self::Out> {
+        writeln!(writer, "export enum {}Enum {{", self.id)?;
+        for field in self.fields.iter() {
+            writeln!(writer, "  {},", field.id)?;
+        }
+        writeln!(writer, "}}\n")?;
+
+        writeln!(writer, "export class {} extends Base {{", self.id)?;
+        writeln!(writer, "  init() {{")?;
+        writeln!(writer, "    return {{")?;
+        for field in self.fields.iter() {
+            write!(writer, "      [{}Enum.{}]: new ", self.id, field.id)?;
+            field.type_.generate(writer, mode)?;
+            writeln!(writer, "(),")?;
+        }
+        writeln!(writer, "    }}")?;
+        writeln!(writer, "  }}")?;
+        writeln!(writer, "}}")?;
+        Ok(())
+    }
+}
+
 impl Generate for Type {
     type Out = ();
 
@@ -97,7 +123,7 @@ impl Generate for Type {
             Type::BasicType(t) => t.generate(writer, mode)?,
             Type::ArrayType(t) => t.generate(writer, mode)?,
             Type::VecType(t) => t.generate(writer, mode)?,
-            Type::StructType(t) => {
+            Type::StructOrEnum(t) => {
                 if mode == 0 {
                     write!(writer, "{}", t)?;
                 } else {
@@ -151,7 +177,7 @@ impl Generate for VecItemType {
     fn generate<W: io::Write>(&self, writer: &mut W, mode: u8) -> io::Result<Self::Out> {
         match self {
             Self::BasicType(t) => t.generate(writer, mode)?,
-            Self::StructType(t) => write!(writer, "{}", t)?,
+            Self::StructOrEnum(t) => write!(writer, "{}", t)?,
         }
         Ok(())
     }

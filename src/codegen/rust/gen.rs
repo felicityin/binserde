@@ -50,6 +50,7 @@ impl Generate for Decl {
     fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
         match self {
             Decl::Struct(s) => s.generate(writer),
+            Decl::Enum(e) => e.generate(writer),
         }
     }
 }
@@ -73,6 +74,36 @@ impl Generate for Struct {
     }
 }
 
+impl Generate for Enum {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
+        writeln!(
+            writer,
+            "#[derive(Serde, Encode, Decode, PartialEq, Clone, Debug)]"
+        )?;
+        writeln!(writer, "pub enum {} {{", self.id)?;
+        for field in &self.fields {
+            write!(writer, "\t")?;
+            field.generate(writer)?;
+            writeln!(writer, ",")?;
+        }
+        writeln!(writer, "}}")?;
+        Ok(())
+    }
+}
+
+impl Generate for EnumField {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
+        write!(writer, "{}(", self.id)?;
+        self.type_.generate(writer)?;
+        write!(writer, ")")?;
+        Ok(())
+    }
+}
+
 impl Generate for Type {
     type Out = ();
 
@@ -81,7 +112,7 @@ impl Generate for Type {
             Type::BasicType(t) => t.generate(writer)?,
             Type::ArrayType(t) => t.generate(writer)?,
             Type::VecType(t) => t.generate(writer)?,
-            Type::StructType(t) => write!(writer, "{}", t)?,
+            Type::StructOrEnum(t) => write!(writer, "{}", t)?,
         }
         Ok(())
     }
@@ -116,7 +147,7 @@ impl Generate for VecItemType {
     fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
         match self {
             Self::BasicType(t) => t.generate(writer)?,
-            Self::StructType(t) => write!(writer, "{}", t)?,
+            Self::StructOrEnum(t) => write!(writer, "{}", t)?,
         }
         Ok(())
     }

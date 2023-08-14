@@ -13,11 +13,24 @@ pub Ast: Ast = <decls: (Decl)*> => Ast { <> };
 
 Decl: Decl = {
     Struct => Decl::Struct(<>),
+    Enum => Decl::Enum(<>),
 }
 
 Struct: Struct = {
     "struct" <id: Ident> "{" <fields: (<Field> ",")*> "}" => {
         Struct { <> }
+    }
+}
+
+Enum: Enum = {
+    "enum" <id: Ident> "{" <fields: (<EnumField> ",")*> "}" => {
+        Enum { <> }
+    }
+}
+
+EnumField: EnumField = {
+    <id: Ident> "(" <type_: VecItemType> ")" => {
+        EnumField { <> }
     }
 }
 
@@ -33,7 +46,7 @@ Type: Type = {
     BasicType => Type::BasicType(<>),
     ArrayType => Type::ArrayType(<>),
     VecType => Type::VecType(<>),
-    <id: Ident> => Type::StructType(<>),
+    <id: Ident> => Type::StructOrEnum(<>),
 }
 
 ArrayType: ArrayType = {
@@ -43,14 +56,14 @@ ArrayType: ArrayType = {
 }
 
 VecType: VecType = {
-    "Vec" "<" <type_: VecItemType> ">" => {
+    "vec" "<" <type_: VecItemType> ">" => {
         VecType { <> }
     }
 }
 
 VecItemType: VecItemType = {
     BasicType => VecItemType::BasicType(<>),
-    <id: Ident> => VecItemType::StructType(<>),
+    <id: Ident> => VecItemType::StructOrEnum(<>),
 }
 
 BasicType: BasicType = {
