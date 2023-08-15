@@ -84,22 +84,11 @@ impl Generate for Enum {
         )?;
         writeln!(writer, "pub enum {} {{", self.id)?;
         for field in &self.fields {
-            write!(writer, "\t")?;
-            field.generate(writer)?;
-            writeln!(writer, ",")?;
+            write!(writer, "\t{}(", field.id)?;
+            field.type_.generate(writer)?;
+            writeln!(writer, "),")?;
         }
         writeln!(writer, "}}")?;
-        Ok(())
-    }
-}
-
-impl Generate for EnumField {
-    type Out = ();
-
-    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
-        write!(writer, "{}(", self.id)?;
-        self.type_.generate(writer)?;
-        write!(writer, ")")?;
         Ok(())
     }
 }

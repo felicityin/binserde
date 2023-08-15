@@ -14,12 +14,7 @@ pub struct Struct {
 
 pub struct Enum {
     pub id:     String,
-    pub fields: Vec<EnumField>,
-}
-
-pub struct EnumField {
-    pub id:    String,
-    pub type_: VecItemType,
+    pub fields: Vec<Field>,
 }
 
 pub struct Field {

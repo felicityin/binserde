@@ -28,9 +28,9 @@ Enum: Enum = {
     }
 }
 
-EnumField: EnumField = {
-    <id: Ident> "(" <type_: VecItemType> ")" => {
-        EnumField { <> }
+EnumField: Field = {
+    <id: Ident> "(" <type_: Type> ")" => {
+        Field { <> }
     }
 }
 

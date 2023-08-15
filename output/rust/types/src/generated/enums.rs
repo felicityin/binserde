@@ -7,6 +7,7 @@ use bincode_macro::Serde;
 pub enum Test5 {
 	A(bool),
 	B(Test6),
+	C(Vec<u32>),
 }
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]

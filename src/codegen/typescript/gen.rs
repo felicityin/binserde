@@ -93,7 +93,7 @@ impl Generate for Struct {
 impl Generate for Enum {
     type Out = ();
 
-    fn generate<W: io::Write>(&self, writer: &mut W, mode: u8) -> io::Result<Self::Out> {
+    fn generate<W: io::Write>(&self, writer: &mut W, _mode: u8) -> io::Result<Self::Out> {
         writeln!(writer, "export enum {}Enum {{", self.id)?;
         for field in self.fields.iter() {
             writeln!(writer, "  {},", field.id)?;
@@ -105,8 +105,8 @@ impl Generate for Enum {
         writeln!(writer, "    return {{")?;
         for field in self.fields.iter() {
             write!(writer, "      [{}Enum.{}]: new ", self.id, field.id)?;
-            field.type_.generate(writer, mode)?;
-            writeln!(writer, "(),")?;
+            field.type_.generate(writer, 1)?;
+            writeln!(writer, ",")?;
         }
         writeln!(writer, "    }}")?;
         writeln!(writer, "  }}")?;

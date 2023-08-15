@@ -5,6 +5,7 @@ import { Arr, Base, Bool, Int8, Int16, Int32, Int64, Int128, Option, String, Uin
 export enum Test5Enum {
   A,
   B,
+  C,
 }
 
 export class Test5 extends Base {
@@ -12,6 +13,7 @@ export class Test5 extends Base {
     return {
       [Test5Enum.A]: new Bool(),
       [Test5Enum.B]: new Test6(),
+      [Test5Enum.C]: new Vec(Uint32),
     }
   }
 }

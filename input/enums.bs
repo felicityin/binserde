@@ -1,6 +1,7 @@
 enum Test5 {
     A(bool),
     B(Test6),
+    C(Vec<u32>),
 }
 
 struct Test6 {
@@ -8,5 +9,5 @@ struct Test6 {
 }
 
 struct Test7 {
-    a: vec<Test5>,
+    a: Vec<Test5>,
 }

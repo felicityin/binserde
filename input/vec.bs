@@ -1,4 +1,4 @@
 struct VecTest {
-    a: vec<u8>,
-    b: vec<u16>,
+    a: Vec<u8>,
+    b: Vec<u16>,
 }
