@@ -130,6 +130,24 @@ impl Generate for Type {
                     write!(writer, "{}()", t)?;
                 }
             }
+            Type::OptionType(t) => t.generate(writer, mode)?,
+        }
+        Ok(())
+    }
+}
+
+impl Generate for OptionType {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W, mode: u8) -> io::Result<Self::Out> {
+        if mode == 0 {
+            write!(writer, "Option<")?;
+            self.type_.generate(writer, mode)?;
+            write!(writer, ">")?;
+        } else {
+            write!(writer, "Option(new ")?;
+            self.type_.generate(writer, mode)?;
+            write!(writer, ")")?;
         }
         Ok(())
     }

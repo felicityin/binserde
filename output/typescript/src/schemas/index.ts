@@ -5,3 +5,4 @@ export * from './nested_struct';
 export * from './array';
 export * from './vec_struct';
 export * from './enums';
+export * from './option';

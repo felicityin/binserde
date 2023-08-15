@@ -102,7 +102,19 @@ impl Generate for Type {
             Type::ArrayType(t) => t.generate(writer)?,
             Type::VecType(t) => t.generate(writer)?,
             Type::StructOrEnum(t) => write!(writer, "{}", t)?,
+            Type::OptionType(t) => t.generate(writer)?,
         }
+        Ok(())
+    }
+}
+
+impl Generate for OptionType {
+    type Out = ();
+
+    fn generate<W: io::Write>(&self, writer: &mut W) -> io::Result<Self::Out> {
+        write!(writer, "Option<")?;
+        self.type_.generate(writer)?;
+        write!(writer, ">")?;
         Ok(())
     }
 }

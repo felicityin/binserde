@@ -47,6 +47,13 @@ Type: Type = {
     ArrayType => Type::ArrayType(<>),
     VecType => Type::VecType(<>),
     <id: Ident> => Type::StructOrEnum(<>),
+    OptionType => Type::OptionType(<>),
+}
+
+OptionType: OptionType = {
+    "Option" "<" <type_: Type> ">" => {
+        OptionType { type_: Box::new(type_) }
+    }
 }
 
 ArrayType: ArrayType = {
@@ -56,7 +63,7 @@ ArrayType: ArrayType = {
 }
 
 VecType: VecType = {
-    "vec" "<" <type_: VecItemType> ">" => {
+    "Vec" "<" <type_: VecItemType> ">" => {
         VecType { <> }
     }
 }

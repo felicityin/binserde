@@ -1,0 +1,14 @@
+struct OptionTest {
+    a: Option<u8>,
+    b: Option<Vec<u32>>,
+    c: Option<Test8>,
+    d: Option<Test9>,
+}
+
+struct Test8 {
+    a: u128,
+}
+
+enum Test9 {
+    A(bool),
+}

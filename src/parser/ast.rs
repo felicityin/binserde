@@ -28,6 +28,11 @@ pub enum Type {
     ArrayType(ArrayType),
     VecType(VecType),
     StructOrEnum(String),
+    OptionType(OptionType),
+}
+
+pub struct OptionType {
+    pub type_: Box<Type>,
 }
 
 pub struct ArrayType {
