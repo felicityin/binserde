@@ -4,10 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "format": "prettier -wu src/*"
   },
   "dependencies": {
     "bincoder": "^0.5.0",
     "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.2"
   }
 }

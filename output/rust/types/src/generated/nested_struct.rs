@@ -5,10 +5,10 @@ use bincode_macro::Serde;
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct Test1 {
-	pub a: Test2,
+    pub a: Test2,
 }
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct Test2 {
-	pub a: u16,
+    pub a: u16,
 }

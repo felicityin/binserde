@@ -5,6 +5,6 @@ use bincode_macro::Serde;
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct Hello {
-	pub a: u8,
-	pub b: u16,
+    pub a: u8,
+    pub b: u16,
 }
