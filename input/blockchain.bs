@@ -1,0 +1,93 @@
+struct Script {
+    code_hash: [u8; 32],
+    hash_type: u8,
+    args:      Vec<u8>,
+}
+
+struct OutPoint {
+    tx_hash: [u8; 32],
+    index:    u32,
+}
+
+struct CellInput {
+    since:           u64,
+    previous_output: OutPoint,
+}
+
+struct CellOutput {
+    capacity:       u64,
+    lock:           Script,
+    type_:          Option<Script>,
+}
+
+struct CellDep {
+    out_point:      OutPoint,
+    dep_type:       u8,
+}
+
+struct RawTransaction {
+    version:        u32,
+    cell_deps:      Vec<CellDep>,
+    header_deps:    Vec<Bytes32>,
+    inputs:         Vec<CellInput>,
+    outputs:        Vec<CellOutput>,
+    outputs_data:   Vec<Bytes>,
+}
+
+struct Transaction {
+    raw:            RawTransaction,
+    witnesses:      Vec<Bytes>,
+}
+
+struct Bytes {
+    v: Vec<u8>,
+}
+
+struct Bytes32 {
+    v: [u8; 32],
+}
+
+struct RawHeader {
+    version:           u32,
+    compact_target:    u32,
+    timestamp:         u64,
+    number:            u64,
+    epoch:             u64,
+    parent_hash:       [u8; 32],
+    transactions_root: [u8; 32],
+    proposals_hash:    [u8; 32],
+    uncles_hash:       [u8; 32],
+    dao:               [u8; 32],
+}
+
+struct Header {
+    raw:   RawHeader,
+    nonce: u128,
+}
+
+struct UncleBlock {
+    header:    Header,
+    proposals: Vec<ProposalShortId>,
+}
+
+struct Block {
+    header:       Header,
+    uncles:       Vec<UncleBlock>,
+    transactions: Vec<Transaction>,
+    proposals:    Vec<ProposalShortId>,
+}
+
+struct ProposalShortId {
+    v: [u8; 10],
+}
+
+struct CellbaseWitness {
+    lock:    Script,
+    message: Bytes,
+}
+
+struct WitnessArgs {
+    lock:        Option<Bytes>, // Lock args
+    input_type:  Option<Bytes>, // Type args for input
+    output_type: Option<Bytes>, // Type args for output
+}

@@ -5,6 +5,6 @@ use bincode_macro::Serde;
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct VecTest {
-	pub a: Vec<u8>,
-	pub b: Vec<u16>,
+    pub a: Vec<u8>,
+    pub b: Vec<u16>,
 }

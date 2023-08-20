@@ -1,5 +1,3 @@
-> Binserde is still in active development.
-
 # Description
 
 A binary encoder / decoder supports Rust ([bincode](https://github.com/felicityin/bincode-macro)) and TypeScript ([bincoder](https://github.com/felicityin/bincoder)).
@@ -25,7 +23,7 @@ Generate Rust code.
 ```
 cargo run -- compile -t rs \
     -i input/hello.bs input/basic_types.bs input/vec.bs input/nested_struct.bs input/array.bs \
-       input/vec_struct.bs input/enums.bs input/option.bs \
+       input/vec_struct.bs input/enums.bs input/option.bs input/blockchain.bs input/complex.bs \
     -o output/rust/types/src/generated
 ```
 
@@ -34,7 +32,7 @@ Generate TypeSript code.
 ```
 cargo run -- compile -t ts \
     -i input/hello.bs input/basic_types.bs input/vec.bs input/nested_struct.bs input/array.bs \
-       input/vec_struct.bs input/enums.bs input/option.bs \
+       input/vec_struct.bs input/enums.bs input/option.bs input/blockchain.bs input/complex.bs \
     -o output/typescript/src/schemas
 ```
 

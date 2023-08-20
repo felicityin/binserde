@@ -1,8 +1,10 @@
-pub mod hello;
-pub mod basic_types;
-pub mod vec;
-pub mod nested_struct;
 pub mod array;
-pub mod vec_struct;
+pub mod basic_types;
+pub mod blockchain;
+pub mod complex;
 pub mod enums;
+pub mod hello;
+pub mod nested_struct;
 pub mod option;
+pub mod vec;
+pub mod vec_struct;

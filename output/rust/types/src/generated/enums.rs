@@ -5,17 +5,17 @@ use bincode_macro::Serde;
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug)]
 pub enum Test5 {
-	A(bool),
-	B(Test6),
-	C(Vec<u32>),
+    A(bool),
+    B(Test6),
+    C(Vec<u32>),
 }
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct Test6 {
-	pub a: u32,
+    pub a: u32,
 }
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct Test7 {
-	pub a: Vec<Test5>,
+    pub a: Vec<Test5>,
 }

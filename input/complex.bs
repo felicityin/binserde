@@ -1,0 +1,33 @@
+enum BaseData {
+    A(Vec<u8>),
+    B(u32),
+    C(u64),
+}
+
+enum BigNumber {
+    U64(u64),
+    U128(u128),
+}
+
+enum AllRoad {
+    BaseData(BaseData),
+    BigNumber(BigNumber),
+}
+
+struct Vehicle {
+    distance: Vec<BaseDataOpt>,
+    gas:      Vec<BigNumberOpt>,
+}
+
+struct BaseDataOpt {
+    v: Option<BaseData>,
+}
+
+struct BigNumberOpt {
+    v: Option<BigNumber>,
+}
+
+struct Garage {
+    car:     Vehicle,
+    monitor: AllRoad,
+}

@@ -5,18 +5,18 @@ use bincode_macro::Serde;
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct OptionTest {
-	pub a: Option<u8>,
-	pub b: Option<Vec<u32>>,
-	pub c: Option<Test8>,
-	pub d: Option<Test9>,
+    pub a: Option<u8>,
+    pub b: Option<Vec<u32>>,
+    pub c: Option<Test8>,
+    pub d: Option<Test9>,
 }
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug, Default)]
 pub struct Test8 {
-	pub a: u128,
+    pub a: u128,
 }
 
 #[derive(Serde, Encode, Decode, PartialEq, Clone, Debug)]
 pub enum Test9 {
-	A(bool),
+    A(bool),
 }
